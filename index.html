@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2f6f4e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Golf Body 365">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.svg">
+<title>Golf Body 365</title>
+<style>
+:root{--bg:#f4f7f3;--card:#fff;--ink:#203126;--muted:#6e7b72;--green:#2f6f4e;--green2:#e4f1e9;--line:#dfe7e1;--gold:#b58b3b;--danger:#9b4b43}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,#285f44,#3f7f5d);color:white;padding:calc(18px + env(safe-area-inset-top)) 18px 18px;position:sticky;top:0;z-index:5}
+header h1{font-size:22px;margin:0}header p{margin:5px 0 0;opacity:.85;font-size:13px}
+main{max-width:720px;margin:auto;padding:14px 14px 100px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 4px 16px rgba(34,70,49,.05)}
+.row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}.grow{flex:1}
+h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:12px 0 8px}.muted{color:var(--muted);font-size:13px}.big{font-size:28px;font-weight:800}
+button,.btn{border:0;border-radius:13px;padding:13px 15px;font-size:16px;font-weight:700;cursor:pointer;background:var(--green);color:#fff}
+button.secondary{background:var(--green2);color:var(--green)}button.ghost{background:#f1f4f2;color:var(--ink)}button.warn{background:#f6ecea;color:var(--danger)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.pill{padding:10px;border-radius:12px;background:#f1f4f2;text-align:center;font-weight:700;cursor:pointer}.pill.active{background:var(--green);color:#fff}
+.exercise{border-top:1px solid var(--line);padding:13px 0}.exercise:first-child{border-top:0}.ex-title{font-weight:800}.sets{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.setbtn{background:#edf3ef;color:var(--green);padding:9px 10px;font-size:13px}.setbtn.done{background:var(--green);color:white}.setline{display:grid;grid-template-columns:44px 1fr 1fr 44px;gap:6px;align-items:center;margin-top:8px}.setline input{min-width:0;padding:9px}.setline .setbtn{padding:10px 4px}.setlabel{font-size:12px;color:var(--muted)}
+input,select,textarea{width:100%;border:1px solid #ccd8d0;border-radius:11px;padding:11px;font-size:16px;background:white;color:var(--ink)}
+label{display:block;font-size:13px;color:var(--muted);margin:8px 0 4px}
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:7px 5px calc(7px + env(safe-area-inset-bottom));z-index:10}
+nav button{background:transparent;color:var(--muted);padding:7px 2px;font-size:11px;border-radius:10px}nav button span{display:block;font-size:20px;margin-bottom:2px}nav button.active{color:var(--green);background:var(--green2)}
+.screen{display:none}.screen.active{display:block}.progress{height:9px;background:#e8eeea;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:var(--green)}
+.stat{background:#f5f8f6;border-radius:14px;padding:12px}.stat b{display:block;font-size:20px;margin-top:3px}
+.notice{background:#fff8e8;border-left:4px solid var(--gold);padding:11px;border-radius:10px;font-size:13px}
+.chatbox{background:linear-gradient(135deg,#f0f5ff,#eef8f2);border:1px solid #dbe7e0}
+.smallbtn{padding:9px 11px;font-size:13px}.checkline{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.checkline input{width:22px;height:22px}.hidden{display:none}.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#203126;color:#fff;padding:10px 14px;border-radius:12px;display:none;z-index:30}
+.calendar-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0}.calendar-head button{padding:8px 12px}.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.calendar-weekday{text-align:center;font-size:12px;color:var(--muted);padding:7px 0}.calendar-day{min-height:65px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);padding:5px 2px;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:4px}.calendar-day.selected{outline:2px solid var(--green)}.calendar-day.today{background:#f0f7f1}.calendar-day .marks{font-size:11px;line-height:1.3;white-space:nowrap}.calendar-day .marks span{display:inline-block;border-radius:5px;padding:1px 3px;margin:1px}.mark-work{background:#d4eadd;color:#20593b}.mark-care{background:#fff0c9;color:#7a5613}.mark-body{background:#e3eafa;color:#304b80}.date-help{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><h1>⛳ Golf Body 365</h1><p>怪我なく、歩けて、ゴルフを楽しめる身体へ</p></header>
+<main>
+<section id="home" class="screen active">
+  <div class="card">
+    <div class="row between"><div><div class="muted" id="today"></div><h2 id="dayTitle">今日のメニュー</h2></div><div class="big" id="dayIcon">🏋️</div></div>
+    <div class="notice" id="dayMessage">重量より、動きの質と余力を大切に。</div>
+    <h3>今日の調子</h3>
+    <div class="grid3" id="condition"><div class="pill" data-v="元気">😊 元気</div><div class="pill active" data-v="普通">🙂 普通</div><div class="pill" data-v="疲れ">😮‍💨 疲れ</div></div>
+    <h3>使える時間</h3>
+    <div class="grid3" id="duration"><div class="pill" data-v="60">60分</div><div class="pill active" data-v="75">75分</div><div class="pill" data-v="90">90分</div></div>
+    <label for="workoutDate">運動した日（過去の日付も選べます）</label><input id="workoutDate" type="date"><label for="menuChoice">今日行うメニュー（曜日と違っても選べます）</label><select id="menuChoice"><option value="auto">曜日の標準メニュー</option><option value="2">胸の日</option><option value="4">脚の日</option><option value="6">背中の日</option></select><button style="width:100%;margin-top:14px" onclick="startWorkout()">トレーニング開始</button>
+  </div>
+  <div class="grid2">
+    <div class="stat"><span class="muted">🚶 今月の歩行</span><b id="monthWalk">0分</b></div>
+    <div class="stat"><span class="muted">🏠 今週のケア</span><b id="weekCare">0回</b></div>
+  </div>
+  <div class="card chatbox">
+    <h2>💬 ChatGPTに相談</h2>
+    <p class="muted">今日の調子・最近のトレーニング記録を相談文にまとめます。</p>
+    <textarea id="chatNote" rows="3" placeholder="例：昨日ゴルフで脚が重い。今日はどう調整したらいい？"></textarea>
+    <button style="width:100%;margin-top:10px" onclick="makeChatPrompt()">相談文を作る</button>
+  </div>
+</section>
+
+<section id="workout" class="screen">
+ <div class="card">
+  <div class="row between"><div><div class="muted" id="workoutSub"></div><h2 id="workoutTitle"></h2></div><button class="ghost smallbtn" onclick="show('home')">戻る</button></div>
+  <div class="progress"><div id="prog" style="width:0%"></div></div>
+  <div id="exerciseList"></div>
+  <button style="width:100%;margin-top:12px" onclick="finishWorkout()">今日のトレーニングを終了</button>
+ </div>
+</section>
+
+<section id="care" class="screen">
+ <div class="card"><h2>🏠 家で5分</h2><p class="muted">頑張りすぎず、毎日少し動きやすい身体に戻します。</p>
+  <label for="careDate">ケアを行った日</label><input type="date" id="careDate"><div id="careList"></div>
+  <button style="width:100%;margin-top:12px" onclick="finishCare()">5分ケア完了 ✓</button><p id="careStatus" style="font-weight:700;color:#2f6f4e" aria-live="polite"></p>
+ </div>
+ <div class="card"><h2>🌙 寝る前ケア</h2>
+  <div class="checkline"><input type="checkbox"><div>マッサージガン：ふくらはぎ 左右30〜45秒</div></div>
+  <div class="checkline"><input type="checkbox"><div>太もも前 左右45秒</div></div>
+  <div class="checkline"><input type="checkbox"><div>お尻 左右45秒</div></div>
+  <div class="checkline"><input type="checkbox"><div>太もも前・お尻を軽くストレッチ</div></div>
+  <p class="muted">骨・膝のお皿・アキレス腱そのものには強く当てません。</p>
+ </div>
+</section>
+
+<section id="body" class="screen">
+ <div class="card"><h2>📊 身体の記録</h2>
+  <label for="bodyDate">測定した日</label><input type="date" id="bodyDate"><div class="grid2"><div><label>体重 kg</label><input id="weight" type="number" step=".1" value="70.3"></div><div><label>体脂肪率 %</label><input id="fat" type="number" step=".1" value="18.2"></div></div>
+  <label>筋肉量 kg</label><input id="muscle" type="number" step=".05" value="54.55">
+  <div class="grid2"><div><label>しゃがみやすさ 1〜5</label><select id="squat"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div><div><label>足首の動き 1〜5</label><select id="ankle"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></div></div>
+  <button style="width:100%;margin-top:14px" onclick="saveBody()">記録する</button>
+ </div>
+ <div class="card"><h2>最近の記録</h2><div id="bodyHistory" class="muted">まだありません。</div></div>
+</section>
+
+<section id="history" class="screen">
+ <div class="card"><h2>🗓️ 運動・ケアカレンダー</h2><p class="date-help">日付をタップすると、その日の記録が見られます。過去の日付を選んで追加入力もできます。</p><div class="calendar-head"><button class="secondary" onclick="changeMonth(-1)">‹ 前月</button><b id="calendarMonth"></b><button class="secondary" onclick="changeMonth(1)">翌月 ›</button></div><div id="calendarGrid" class="calendar-grid"></div><div class="muted" style="margin-top:10px">🟩 筋トレ　🟨 ケア　🟦 身体測定</div><div id="selectedDayInfo" class="exercise"></div><button class="secondary" onclick="addForSelectedDay()" style="width:100%">選んだ日に運動を追加</button></div><div class="card"><h2>💾 バックアップ・復元</h2><p class="muted">記録をJSONファイルとして保存できます。更新や機種変更の前にバックアップしてください。復元すると現在の記録と統合します。</p><button onclick="exportBackup()">記録をバックアップ</button><label for="backupFile">バックアップファイルを復元</label><input type="file" id="backupFile" accept=".json,application/json" onchange="importBackup(this)"><p id="backupStatus" class="muted" aria-live="polite"></p></div><div class="card"><h2>📅 トレーニング履歴</h2><div id="historyList" class="muted">まだ記録がありません。</div></div>
+ <div class="card"><h2>大切にすること</h2><p>①怪我をしない　②歩く力　③足首　④股関節　⑤筋力維持</p><p class="muted">重量の自己ベストより「余力を残して続けられた」を成功にします。</p></div>
+</section>
+</main>
+
+<nav>
+<button class="active" onclick="show('home',this)"><span>🏠</span>ホーム</button>
+<button onclick="openToday(this)"><span>🏋️</span>筋トレ</button>
+<button onclick="show('care',this)"><span>🧘</span>ケア</button>
+<button onclick="show('body',this)"><span>📊</span>身体</button>
+<button onclick="show('history',this)"><span>📅</span>履歴</button>
+</nav>
+<div id="toast" class="toast"></div>
+
+<script>
+const menus={
+  2:{name:"胸の日",icon:"🏋️",ex:[
+    ["準備：軽い歩行",5,"分"],["壁への膝タッチ",10,"回×左右"],["ヒップヒンジ",10,"回"],
+    ["ベンチプレス",12,"回×3","60kg"],["ダンベルショルダー",12,"回×3","14kg"],
+    ["ダンベル腕",12,"回×2","14kg"],["ロープ・ケーブル",12,"回×3","前回重量"],
+    ["ゴルフ姿勢→右股関節",10,"回"],["ウォーキング",30,"分","6.1km/h"]]},
+  4:{name:"脚の日",icon:"🦵",ex:[
+    ["壁への膝タッチ",10,"回×2・左右"],["膝曲げふくらはぎストレッチ",30,"秒×2・左右"],["壁ヒップヒンジ",10,"回×2"],
+    ["つかまりスクワット",5,"回"],["スクワット系マシン",12,"回×3","140〜150kg目安"],
+    ["レッグプレス",12,"回×2〜3","140〜150kg目安"],["中臀筋系",15,"回×2"],
+    ["腹筋",14,"回×2"],["背筋",12,"回×2"],["ウォーキング",20,"分","6.1km/h"]]},
+  6:{name:"背中の日",icon:"🔙",ex:[
+    ["準備：軽い歩行",5,"分"],["壁への膝タッチ",10,"回×左右"],["ヒップヒンジ",10,"回"],
+    ["ラットプルダウン",12,"回×3","57kg"],["ローイング",12,"回×3"],
+    ["肩甲骨系",15,"回×2"],["胸椎回旋",5,"回×左右"],["ゴルフ姿勢→右股関節",10,"回"],
+    ["ウォーキング",30,"分","6.1km/h"]]}
+};
+const careItems=["壁への膝タッチ　左右10回","膝を曲げたふくらはぎストレッチ　左右30秒","壁ヒップヒンジ　10回","つかまりスクワット　5回","ゴルフ姿勢から右のお尻を後ろへ　5回"];
+let state=JSON.parse(localStorage.getItem("gb365")||'{"workouts":[],"body":[],"care":[],"last":{}}');
+let selectedCondition="普通",selectedDuration=75,currentMenu=null,currentDone=[];
+
+function localDay(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
+function chosenISO(id){let value=document.getElementById(id).value;if(!value)throw Error("日付を選んでください");if(value>localDay(new Date()))throw Error("未来の日付には記録できません");return new Date(value+"T12:00:00").toISOString()}
+function dayOf(x){if(!x)return "";let d=new Date(x);return Number.isNaN(d.getTime())?"":localDay(d)}
+function persist(){localStorage.setItem("gb365",JSON.stringify(state))}
+function toast(s){let t=document.getElementById("toast");t.textContent=s;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
+function show(id,btn){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");if(btn){document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}if(id==="history"){renderHistory();renderCalendar();}if(id==="body")renderBody()}
+function setupPills(id,cb){document.querySelectorAll("#"+id+" .pill").forEach(p=>p.onclick=()=>{document.querySelectorAll("#"+id+" .pill").forEach(x=>x.classList.remove("active"));p.classList.add("active");cb(p.dataset.v)})}
+setupPills("condition",v=>selectedCondition=v);setupPills("duration",v=>selectedDuration=+v);
+
+function todayMenu(){
+ let d=new Date().getDay(); return menus[d]||null;
+}
+function init(){
+ let n=new Date(), names=["日","月","火","水","木","金","土"];
+ document.getElementById("today").textContent=`${n.getMonth()+1}月${n.getDate()}日（${names[n.getDay()]}）`;
+ let m=todayMenu();
+ document.getElementById("dayTitle").textContent=m?`今日は${m.name}`:"今日は回復・ケアの日";
+ document.getElementById("dayIcon").textContent=m?m.icon:"🧘";
+ document.getElementById("dayMessage").textContent=m?"重量より、動きの質と余力を大切に。":"5分ケアや軽いウォーキングで十分です。";
+ ["workoutDate","careDate","bodyDate"].forEach(id=>document.getElementById(id).value=localDay(new Date())); renderStats(); renderCare(); renderBody();
+}
+function adjustedExercises(m){
+ let a=m.ex.map(x=>[...x]);
+ if(selectedDuration===60){a=a.filter((x,i)=>!(["ダンベル腕","肩甲骨系","中臀筋系"].includes(x[0])));let w=a.find(x=>x[0]==="ウォーキング");if(w)w[1]=20}
+ if(selectedDuration===90){let w=a.find(x=>x[0]==="ウォーキング");if(w)w[1]=30}
+ if(selectedCondition==="疲れ"){a.forEach(x=>{if((x[2]||"").includes("×3"))x[2]=x[2].replace("×3","×2")});let w=a.find(x=>x[0]==="ウォーキング");if(w)w[1]=Math.min(w[1],20)}
+ return a;
+}
+function startWorkout(menu){
+ currentMenu=menu||menus[document.getElementById("menuChoice").value]||todayMenu()||menus[2]; currentDone=[];currentSets={};
+ document.getElementById("workoutTitle").textContent=currentMenu.name;
+ document.getElementById("workoutSub").textContent=`${selectedDuration}分コース・調子：${selectedCondition}`;
+ renderExercises();show("workout");
+}
+function openToday(btn){startWorkout();document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function setCount(x){let match=String(x[2]||"").match(/×(\d+)/);return match?+match[1]:1}
+function renderExercises(){
+ let a=adjustedExercises(currentMenu),box=document.getElementById("exerciseList");box.innerHTML="";
+ a.forEach((x,i)=>{
+  let prev=state.last[x[0]]||{},weight=prev.weight??x[3]??"",reps=prev.reps??x[1],count=setCount(x),hasInput=!!(x[3]||prev.weight||prev.sets);
+  let d=document.createElement("div");d.className="exercise";
+  d.innerHTML=`<div class="row between"><div><div class="ex-title">${escapeHtml(x[0])}</div><div class="muted">${x[1]} ${escapeHtml(x[2]||"")} ${hasInput?"・前回の値を表示":""}</div></div><button class="setbtn" id="done${i}" onclick="toggleEx(${i},this)">✓</button></div>`;
+  if(hasInput){let area=document.createElement("div");area.id="sets"+i;for(let j=0;j<count;j++){
+   let ps=prev.sets?.[j]||{weight,reps};area.insertAdjacentHTML("beforeend",`<div class="setline"><span class="setlabel">${j+1}セット</span><input aria-label="${j+1}セット重量" id="w${i}_${j}" value="${escapeHtml(ps.weight)}" placeholder="重量"><input aria-label="${j+1}セット回数" id="r${i}_${j}" value="${escapeHtml(ps.reps)}" placeholder="回数"><button class="setbtn" id="setdone${i}_${j}" onclick="toggleSet(${i},${j},this)">✓</button></div>`);
+  }d.appendChild(area)}box.appendChild(d);
+ });updateProg();
+}
+let currentSets={};
+function toggleSet(i,j,b){let k=i+"_"+j;currentSets[k]=!currentSets[k];b.classList.toggle("done",currentSets[k]);let count=setCount(adjustedExercises(currentMenu)[i]);currentDone[i]=Array.from({length:count},(_,n)=>!!currentSets[i+"_"+n]).every(Boolean);document.getElementById("done"+i).classList.toggle("done",!!currentDone[i]);updateProg()}
+function toggleEx(i,b){currentDone[i]=!currentDone[i];b.classList.toggle("done",currentDone[i]);let count=setCount(adjustedExercises(currentMenu)[i]);if(document.getElementById("sets"+i)){for(let j=0;j<count;j++){currentSets[i+"_"+j]=currentDone[i];document.getElementById("setdone"+i+"_"+j).classList.toggle("done",currentDone[i])}}updateProg()}
+function updateProg(){let a=adjustedExercises(currentMenu||menus[2]);let n=currentDone.filter(Boolean).length;document.getElementById("prog").style.width=(100*n/a.length)+"%"}
+function finishWorkout(){
+ let workoutDate;try{workoutDate=chosenISO("workoutDate")}catch(e){alert(e.message);return}
+ if(!currentDone.some(Boolean)&&!Object.values(currentSets).some(Boolean)){alert("まだ完了した種目がありません。記録せずに戻る場合は『戻る』を押してください。");return;}
+ let a=adjustedExercises(currentMenu),detail=a.map((x,i)=>{let count=setCount(x),hasInput=!!document.getElementById("sets"+i),sets=[];
+  if(hasInput){for(let j=0;j<count;j++)sets.push({weight:document.getElementById(`w${i}_${j}`).value,reps:document.getElementById(`r${i}_${j}`).value,done:!!currentSets[i+"_"+j]})}
+  let prev=state.last[x[0]]||{},weight=sets[0]?.weight??prev.weight??x[3]??"",reps=sets[0]?.reps??prev.reps??x[1];
+  if(currentDone[i]||sets.some(z=>z.done))state.last[x[0]]={weight,reps,sets};
+  return {name:x[0],done:!!currentDone[i]||sets.some(z=>z.done),weight,reps,sets,unit:x[2]||""};
+ });state.workouts.unshift({date:workoutDate,recordedAt:new Date().toISOString(),name:currentMenu.name,condition:selectedCondition,duration:selectedDuration,detail});persist();currentSets={};toast("記録しました ✓");renderStats();show("home")
+}
+function renderCare(){let b=document.getElementById("careList");b.innerHTML=careItems.map((x,i)=>`<label class="checkline"><input type="checkbox" id="c${i}"><div>${x}</div></label>`).join("")}
+function finishCare(){let checked=[...document.querySelectorAll("#careList input")].filter(x=>x.checked).length;if(!checked){alert("実施したケアにチェックを付けてください");return;}let iso;try{iso=chosenISO("careDate")}catch(e){alert(e.message);return}let now=new Date(iso);state.care.unshift(iso);persist();document.getElementById("careStatus").textContent=`✓ ${now.toLocaleString("ja-JP")} に${checked}項目のケアを記録しました`;renderStats();toast("ケアを記録しました ✓")}
+function saveBody(){let iso;try{iso=chosenISO("bodyDate")}catch(e){alert(e.message);return}state.body.unshift({date:iso,weight:+weight.value,fat:+fat.value,muscle:+muscle.value,squat:+squat.value,ankle:+ankle.value});persist();renderBody();toast("身体データを記録しました")}
+function renderBody(){let b=document.getElementById("bodyHistory");if(!state.body.length){b.textContent="まだありません。";return}b.innerHTML=state.body.slice(0,8).map(x=>`<div class="exercise"><b>${new Date(x.date).toLocaleDateString("ja-JP")}</b><br>体重 ${x.weight}kg ・ 体脂肪 ${x.fat}% ・ 筋肉量 ${x.muscle}kg<br>しゃがみ ${x.squat}/5 ・ 足首 ${x.ankle}/5</div>`).join("")}
+let calendarCursor=new Date(),calendarSelected=localDay(new Date());
+function changeMonth(delta){calendarCursor=new Date(calendarCursor.getFullYear(),calendarCursor.getMonth()+delta,1);renderCalendar()}
+function selectCalendarDay(day){calendarSelected=day;renderCalendar()}
+function renderCalendar(){let box=document.getElementById("calendarGrid");if(!box)return;let y=calendarCursor.getFullYear(),m=calendarCursor.getMonth();document.getElementById("calendarMonth").textContent=`${y}年${m+1}月`;let first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();let html=["日","月","火","水","木","金","土"].map(x=>`<div class="calendar-weekday">${x}</div>`).join("");for(let i=0;i<first;i++)html+="<div></div>";for(let i=1;i<=days;i++){let date=`${y}-${String(m+1).padStart(2,"0")}-${String(i).padStart(2,"0")}`,wc=state.workouts.filter(x=>dayOf(x.date)===date).length,cc=state.care.filter(x=>dayOf(x)===date).length,bc=state.body.filter(x=>dayOf(x.date)===date).length;html+=`<button class="calendar-day ${date===calendarSelected?"selected":""} ${date===localDay(new Date())?"today":""}" onclick="selectCalendarDay('${date}')"><b>${i}</b><span class="marks">${wc?`<span class="mark-work">筋${wc}</span>`:""}${cc?`<span class="mark-care">ケ${cc}</span>`:""}${bc?`<span class="mark-body">体${bc}</span>`:""}</span></button>`}box.innerHTML=html;let w=state.workouts.filter(x=>dayOf(x.date)===calendarSelected),c=state.care.filter(x=>dayOf(x)===calendarSelected).length,b=state.body.filter(x=>dayOf(x.date)===calendarSelected).length;document.getElementById("selectedDayInfo").innerHTML=`<b>${calendarSelected}</b><p class="muted">${w.length? w.map(x=>escapeHtml(x.name)).join("・"):"筋トレなし"} ／ ケア ${c}回 ／ 身体測定 ${b}件</p>`}
+function addForSelectedDay(){if(calendarSelected>localDay(new Date())){alert("未来の日付には入力できません");return}document.getElementById("workoutDate").value=calendarSelected;show("home");toast("運動日を選択しました。メニューを選んで開始してください")}
+function renderHistory(){let b=document.getElementById("historyList");if(!state.workouts.length){b.textContent="まだ記録がありません。";return}b.innerHTML=state.workouts.slice(0,30).map((x,i)=>`<div class="exercise"><div class="row between"><div><b>${new Date(x.date).toLocaleDateString("ja-JP")}　${x.name}</b><br>${x.duration}分・調子：${x.condition}・完了 ${x.detail.filter(y=>y.done).length}/${x.detail.length}</div><button class="warn smallbtn" onclick="deleteWorkout(${i})">削除</button></div></div>`).join("")}
+function deleteWorkout(i){if(confirm("このトレーニング履歴を削除しますか？")){state.workouts.splice(i,1);persist();renderHistory();renderStats();renderCalendar()}}
+function renderStats(){
+ let now=new Date(), month=now.getMonth(),yr=now.getFullYear(),walk=0;
+ state.workouts.forEach(w=>{let d=new Date(w.date);if(d.getMonth()===month&&d.getFullYear()===yr){let z=w.detail.find(x=>x.name==="ウォーキング"&&x.done);if(z)walk+=+z.reps||0}});
+ document.getElementById("monthWalk").textContent=walk+"分";
+ let start=new Date();start.setDate(start.getDate()-6);document.getElementById("weekCare").textContent=state.care.filter(x=>new Date(x)>=start).length+"回";
+}
+async function makeChatPrompt(){
+ let note=document.getElementById("chatNote").value.trim(), last=state.workouts[0], body=state.body[0];
+ let s=`私は、怪我をせず筋力を維持し、歩く力・足首・股関節を改善してゴルフを長く楽しむことを目的にしています。火曜は胸、木曜は脚、土曜は背中の筋トレをしています。`;
+ if(last)s+=`直近のトレーニングは${new Date(last.date).toLocaleDateString("ja-JP")}の${last.name}、調子は${last.condition}、${last.duration}分コースでした。`;
+ if(body)s+=`直近の身体データは体重${body.weight}kg、体脂肪${body.fat}%、筋肉量${body.muscle}kg、しゃがみやすさ${body.squat}/5、足首${body.ankle}/5です。`;
+ if(note)s+=`相談：${note}`;
+ s+=`無理に重量を上げず、怪我予防とゴルフへの効果を優先して、今日のメニュー調整を提案してください。`;
+ try{await navigator.clipboard.writeText(s);toast("相談文をコピーしました。ChatGPTに貼り付けてください");}catch(e){prompt("この相談文をコピーしてChatGPTに貼り付けてください",s)}
+}
+
+function exportBackup(){let payload={app:"Golf Body 365",version:5,exportedAt:new Date().toISOString(),data:state};let blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});let url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="golf-body-365-backup-"+new Date().toISOString().slice(0,10)+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);document.getElementById("backupStatus").textContent="バックアップファイルを保存しました。iPhoneの『ファイル』アプリで確認してください。"}
+async function importBackup(input){let file=input.files?.[0];if(!file)return;try{let obj=JSON.parse(await file.text()),data=obj.data;if(obj.app!=="Golf Body 365"||!data||!Array.isArray(data.workouts)||!Array.isArray(data.care)||!Array.isArray(data.body)||typeof data.last!=="object"||!data.last)throw Error("Golf Body 365のバックアップではありません");if(!confirm("バックアップの記録を現在の記録と統合します。続けますか？"))return;let unique=(a,b)=>{let m=new Map();[...a,...b].forEach(x=>m.set(JSON.stringify(x),x));return [...m.values()]};state.workouts=unique(state.workouts,data.workouts).sort((a,b)=>new Date(b.date)-new Date(a.date));state.care=[...new Set([...state.care,...data.care])].sort().reverse();state.body=unique(state.body,data.body).sort((a,b)=>new Date(b.date)-new Date(a.date));state.last={...data.last,...state.last};persist();renderStats();renderHistory();renderBody();renderCalendar();document.getElementById("backupStatus").textContent="復元しました。履歴をご確認ください。"}catch(e){alert("復元できませんでした："+e.message)}finally{input.value=""}}
+
+init();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>
